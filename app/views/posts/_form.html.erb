@@ -1,0 +1,23 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_for @post do |f| %>
+          <div class="field">
+            <%= f.label :item, "アイテム", class: "label" %>
+            <%= f.text_field :item, class: "input" %>
+          </div>
+          <div class="field">
+            <%= f.label :body, "アイテム詳細", class: "label" %>
+            <%= f.text_area :body, class: "textarea" %>
+            </div>
+          <div class="field">  
+            <%= f.label :image, "画像", class: "label" %>
+            <%= f.attachment_field :post_images_images, multiple: true, class: "input" %>
+          </div>
+          <%= f.submit "投稿", class: "button is-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<section class="hero has-background-grey">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ログイン
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :username, "名前", class: "label" %>
+            <p class="control has-icons-left">
+              <%= f.text_field :username, autofocus: true, autocomplete: "username", :placeholder => "username", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </p>
+          </div>
+        
+          <div class="field">
+            <%= f.label :email, "メールアドレス", class: "label" %>
+            <p class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <%= f.label :password, "パスワード", class: "label" %>
+            <p class="control has-icons-left">
+              <%= f.password_field :password, autocomplete: "current-password", :placeholder => "password", class: "input" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "ログイン", class: "button is-success" %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<div class="container marketing">
+  <div class="row d-flex justify-content-center">
+    <div class="col-10 mt-5">
+      <h1>フォロワー一覧</h1>
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= link_to user_path(user) do %>
+                  <%= user.username %>
+                <% end %>
+              </td>
+              <td>
+                <% if user != current_user %>
+                  <% if user.is_followed_by?(current_user) %>
+                    <%= link_to "フォロー解除", user_relationships_path(user), method: :delete , class: "button is-danger" %>
+                  <% else %>
+                    <%= link_to "フォロー", user_relationships_path(user), method: :post , class: "button is-info" %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
