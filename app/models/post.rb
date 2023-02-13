@@ -8,6 +8,5 @@ class Post < ApplicationRecord
   with_options presence: true do
     validates :item
     validates :body
-    validates :image
   end
 end
