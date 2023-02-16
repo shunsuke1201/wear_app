@@ -14,9 +14,9 @@
       <div class="column is-7">
         <div class="card">
           <div class="card-image">
-            <figure class="image is-4by3">
+            <figure class="image" id="slider">
               <% @post.post_images.each do |image| %>
-                <%= attachment_image_tag image, :image %>
+                <%= attachment_image_tag image, :image, :fill, 800, 800 %>
               <% end %>
             </figure>
           </div>
