@@ -35,9 +35,7 @@
                 <div class="media-content">
                   <div class="title"><%= link_to post.user.username, user_path(post.user) %></div>
                 </div>
-                <div id="favorite_buttons_<%= post.id %>">
-                  <%= render "favorites/favorite", post: post %>
-                </div>
+                
               </div>
               <div class="content">
                 <time><%= post.updated_at.strftime("%Y年-%m月-%d日 %H:%M") %></time>

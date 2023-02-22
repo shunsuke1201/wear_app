@@ -38,19 +38,14 @@
                   <td><time><%= @post.updated_at.strftime("%Y年-%m月-%d日 %H:%M") %></time></td>
                 </tr>
               </table>
-              <% if current_user.already_favorited?(@post) %>
-                <%= link_to post_favorites_path(@post), method: :delet do %>
-                  <i class="fa-solid fa-heart"></i>
+              <div id="favorites_buttons<%= @post.id %>">
+                <%= render partial: "favorites/favorite", post: @post, favorite: @favorite %>
+              </div>
+              <% if user_signed_in? %>
+                <% if @post.user.id == current_user.id %>
+                  <%= link_to "編集", edit_post_path(@post), class: "button is-success" %>
+                  <%= link_to "削除", post_path(@post), method: :delete, class: "button is-danger" %>
                 <% end %>
-              <% else %>
-                <%= link_to post_favorites_path(@post), method: :create do %>
-                    <i class="fa-regular fa-heart"></i>
-                <% end %>
-              <% end %>
-              <%= @post.favorites.count %>
-              <% if @post.user.id == current_user.id %>
-                <%= link_to "編集", edit_post_path(@post), class: "button is-success" %>
-                <%= link_to "削除", post_path(@post), method: :delete, class: "button is-danger" %>
               <% end %>
             </div>
           </div>

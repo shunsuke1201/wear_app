@@ -1,11 +1,13 @@
-<% if current_user.already_favorited?(post) %>
-  <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-    <i class="fa-solid fa-heart"></i>
-    <%= post.favorites.count %>
-  <% end %>
-<% else %>
-  <%= link_to post_favorites_path(post), method: :post, remote: true do %>
-    <i class="fa-regular fa-heart"></i>
-    <%= post.favorites.count %>
+<% if user_signed_in? %>
+  <% unless @post.favorite_user(current_user.id).blank? %>
+    <%= link_to post_favorite_path(post_id: @post.id, id: @post.favorites[0].id), method: :delete, remote: true do %>
+      <i class="fa-solid fa-heart"></i>
+      <%= @post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(@post.id), method: :post, remote: true do %>
+      <i class="fa-regular fa-heart"></i>
+      <%= @post.favorites.count %>
+    <% end %>
   <% end %>
 <% end %>
