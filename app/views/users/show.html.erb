@@ -15,21 +15,23 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-8">
+      <div class="column is-10">
         <div class="columns is-centered">
-          <div class="column is-4">
-            <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
-              <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no-image.png", class: "profile_image is-rounded" %>
+          <div class="column is-4" id="image-name">
+            <figure class="image">
+              <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000, fallback: "no-image.png" %>
             </figure>
+            <p class="name">
+              <strong>
+                <%= @user.username %>
+              </strong>
+            </p>
           </div>
           <div class="column is-8">
             <table class="table is-fullwidth">
               <tr>
                 <td class="is-size-4">
                   <strong>
-                    <data>
-                      <%= @user.username %>
-                    </data>
                     <data>
                       <%= @user.height %>cm
                     </data>

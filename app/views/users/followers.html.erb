@@ -3,15 +3,14 @@
     <div class="col-10 mt-5">
       <h1>フォロワー一覧</h1>
       <table class="table text-center">
-        <thead>
-          <tr>
-            <th>ユーザー名</th>
-            <th></th>
-          </tr>
-        </thead>
         <tbody>
           <% @users.each do |user| %>
             <tr>
+              <td>
+                <div class="profile_image" id="image-name">
+                <%= attachment_image_tag user, :profile_image, :fill, 80, 80 %>
+                </div>
+              </td>
               <td>
                 <%= link_to user_path(user) do %>
                   <%= user.username %>

@@ -29,8 +29,14 @@
     <% end %>
       
     <nav class="navbar has-background-grey-dark">
-      <%= link_to root_path, class: "navbar-item" do %>
-        <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+      <% if user_signed_in? %>
+        <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+          <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+        <% end %>
+      <% else %>
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+        <% end %>
       <% end %>
       
       <% if user_signed_in? %>
@@ -39,7 +45,7 @@
             <%= link_to "投稿一覧", posts_path, class: "navbar-item button is-warning is-light" %>
           </div>
           <div class="navbar-item">
-            <%= link_to "ユーザー一覧", users_path, class: " button is-warning is-light" %>
+            <%= link_to "ユーザー一覧", users_path, class: "button is-warning is-light" %>
           </div>
 
           <div class="navbar-end">
