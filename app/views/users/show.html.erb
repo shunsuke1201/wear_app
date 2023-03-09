@@ -38,9 +38,8 @@
                     <data>
                       <%= @user.weight %>kg
                     </data>
-                    <data>
-                      <%= link_to @user.followings.count, followings_user_path(@user) %>フォロー
-                      <%= link_to @user.followers.count, followers_user_path(@user) %>フォロワー
+                    <data id="relationship_count">
+                      <%= render partial: "relationships/relationship_count", locals: { user: @user } %>
                     </data>
                   </strong>
                 </td>
@@ -52,12 +51,8 @@
                   <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
                 </td>
                 <% else %>
-                <td>
-                  <% if @user.is_followed_by?(current_user) %>
-                    <%= link_to "フォロー解除", user_relationships_path(@user), method: :delete , class: "button is-danger" %>
-                  <% else %>
-                    <%= link_to "フォロー", user_relationships_path(@user), method: :post , class: "button is-info" %>
-                  <% end %>
+                <td id="relationship_<%= @user.id %>">
+                  <%= render partial: "relationships/relationship", locals: { user: @user } %>
                 </td>
                 <% end %>
               </tr>
