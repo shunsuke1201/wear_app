@@ -24,8 +24,14 @@
   <% if @posts.present? %>
     <%= render "posts"%>
   <% else %>
-    <p>該当するアイテムが見つかりませんでした</p>
+    <p class="no-mach">該当するアイテムが見つかりませんでした</p>
   <% end %>
 <% else %>
   <%= render "posts"%>
 <% end %>
+
+<div class="row" id="paginate">
+  <div class="col-md-2">
+    <%= paginate @posts %>
+  </div>
+</div>

@@ -63,3 +63,5 @@ gem 'rails-i18n'
 gem 'font-awesome-sass'
 
 gem 'ransack'
+
+gem 'kaminari'
