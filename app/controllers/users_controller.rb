@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_find, { only:[:show, :edit, :update]}
+  before_action :user_find, { only:[:show, :edit, :update, :followings, :followers]}
   before_action :authenticate_user!, except: [:index]
   
   def index
@@ -27,13 +27,11 @@ class UsersController < ApplicationController
   end
   
   def followings
-    user = User.find(params[:id])
-    @users = user.followings
+    @users = @user.followings
   end
   
   def followers
-    user = User.find(params[:id])
-    @users = user.followers
+    @users = @user.followers
   end
   
   private

@@ -7,42 +7,25 @@
     </div>
   </div>
 </section>
-<section class="section">
+<section class="form-section">
   <div class="container">
-    <div class="columns is-multiline">
-      <% @posts.each do |post| %>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <% post.post_images.first(1).each do |post_image| %>
-                  <%= link_to post_path(post) do %>
-                    <%= attachment_image_tag post_image, :image %>
-                  <% end %>
-                <% end %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <%= link_to post.item, post_path(post) %>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <%= attachment_image_tag post.user, :profile_image, :fill, 1000, 1000, fallback: "no-image.png", class: "profile_image" %>
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <div class="title"><%= link_to post.user.username, user_path(post.user) %></div>
-                </div>
-              </div>
-              <div class="content">
-                <time><%= post.updated_at.strftime("%Y年-%m月-%d日 %H:%M") %></time>
-              </div>
-            </div>
-          </div>
+    <div class="search-form">
+      <%= search_form_for @q do |f| %>
+        <div class="field">
+          <%= f.label :item_cont %>
+          <%= f.search_field :item_cont %>
+          <%= f.submit "検索", class: "button is-success" %>
         </div>
       <% end %>
     </div>
   </div>
 </section>
+<% if params[:q] %>
+  <% if @posts.present? %>
+    <%= render "posts"%>
+  <% else %>
+    <p>該当するアイテムが見つかりませんでした</p>
+  <% end %>
+<% else %>
+  <%= render "posts"%>
+<% end %>

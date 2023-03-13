@@ -16,12 +16,12 @@
                   <%= user.username %>
                 <% end %>
               </td>
-              <td>
+              <td id="relationship_<%= user.id %>">
                 <% if user != current_user %>
                   <% if user.is_followed_by?(current_user) %>
-                    <%= link_to "フォロー解除", user_relationships_path(user), method: :delete , class: "button is-danger" %>
+                    <%= link_to "フォロー解除", user_relationships_path(user), method: :delete, remote: true, class: "button is-danger" %>
                   <% else %>
-                    <%= link_to "フォロー", user_relationships_path(user), method: :post , class: "button is-info" %>
+                    <%= link_to "フォロー", user_relationships_path(user), method: :post, remote: true, class: "button is-info" %>
                   <% end %>
                 <% end %>
               </td>
