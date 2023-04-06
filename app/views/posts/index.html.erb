@@ -20,15 +20,21 @@
     </div>
   </div>
 </section>
-<% if params[:q] %>
-  <% if @posts.present? %>
-    <%= render "posts"%>
-  <% else %>
-    <p class="no-mach">該当するアイテムが見つかりませんでした</p>
-  <% end %>
-<% else %>
-  <%= render "posts"%>
-<% end %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% if params[:q] %>
+        <% if @posts.present? %>
+          <%= render partial: 'posts/post', collection: @posts %>
+        <% else %>
+          <p class="no-mach">該当するアイテムが見つかりませんでした</p>
+        <% end %>
+      <% else %>
+        <%= render partial: 'posts/post', collection: @posts %>
+      <% end %>
+    </div>
+  </div>
+</section>
 
 <div class="row" id="paginate">
   <div class="col-md-2">

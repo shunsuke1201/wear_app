@@ -17,3 +17,4 @@ ActionView::Base.field_error_proc = proc do |html_tag, instance|
     end
   end
 end
+

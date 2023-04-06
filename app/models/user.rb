@@ -7,7 +7,13 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
-  validates :username, presence: true
+  with_options presence: true do
+    validates :username, length: { maximum: 10 }
+    validates :email
+    validates :password, on: :create
+    validates :height, numericality: { greater_than_or_equal_to: 0, less_than: 300 }
+    validates :weight, numericality: { greater_than_or_equal_to: 0, less_than: 300 }
+  end
   
   def already_favorited?(post)
     self.favorites.exists?(post_id: post.id)

@@ -34,6 +34,21 @@
           </div>
           
           <div class="field">
+            <%= f.label :current_password, "現在のパスワード(変更する時のみ入力)", class: "label" %>
+            <%= f.password_field :current_password, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :password, "新しいパスワード", class: "label" %>
+            <%= f.password_field :password, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "label" %>
+            <%= f.password_field :password_confirmation, class: "input" %>
+          </div>
+          
+          <div class="field">
             <%= f.label :profile_image, "プロフィール画像", class: "label" %>
             <%= f.attachment_field :profile_image, class: "input" %>
           </div>

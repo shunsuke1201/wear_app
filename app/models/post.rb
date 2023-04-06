@@ -3,11 +3,11 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_images, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image, append: :true
-  attachment :image
   
   with_options presence: true do
     validates :item
     validates :body
+    validates :post_images
   end
   
   def favorite_user(user_id)

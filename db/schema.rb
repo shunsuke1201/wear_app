@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_13_064552) do
+ActiveRecord::Schema.define(version: 2023_03_16_010731) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2023_02_13_064552) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.string "item"
-    t.text "body"
+    t.string "item", null: false
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2023_02_13_064552) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "username"
-    t.integer "height"
-    t.integer "weight"
+    t.string "username", null: false
+    t.integer "height", null: false
+    t.integer "weight", null: false
     t.text "profile"
     t.string "profile_image_id"
     t.datetime "created_at", precision: 6, null: false

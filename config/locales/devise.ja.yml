@@ -7,6 +7,8 @@ ja:
         image: 画像
       user:
         username: 名前
+        height: 身長
+        weight: 体重
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻

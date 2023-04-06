@@ -1,4 +1,4 @@
-<section class="hero ihas-background-grey">
+<section class="hero has-background-grey">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
@@ -31,6 +31,26 @@
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+        
+        <div class="field">
+          <%= f.label :height, "身長", class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.text_field :height, autofocus: true, autocomplete: "height", :placeholder => "height", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fa-ruler-vertical"></i>
+            </span>
+          </p>
+        </div>
+        
+        <div class="field">
+          <%= f.label :weight, "体重", class: "label" %>
+          <p class="control has-icons-left">
+            <%= f.text_field :weight, autofocus: true, autocomplete: "weight", :placeholder => "weight", class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fas fa-weight"></i>
             </span>
           </p>
         </div>
