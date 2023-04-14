@@ -27,7 +27,7 @@
         <% if @posts.present? %>
           <%= render partial: 'posts/post', collection: @posts %>
         <% else %>
-          <p class="no-mach">該当するアイテムが見つかりませんでした</p>
+          <strong class="no-mach">該当するアイテムが見つかりませんでした</strong>
         <% end %>
       <% else %>
         <%= render partial: 'posts/post', collection: @posts %>

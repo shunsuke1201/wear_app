@@ -57,11 +57,6 @@
         <p class="panel-heading">
           By <%= @post.user.username %>
         </p>
-        <div class="panel-block">
-          <p class="control">
-            <%= @post.user.profile %>
-          </p>
-        </div>
         <%= link_to user_path(@post.user), class: "panel-block" do %>
           <span class="panel-icon">
             <i class="fas fa-user" aria-hidden="true"></i>

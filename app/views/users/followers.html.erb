@@ -1,35 +1,11 @@
-<div class="container marketing">
-  <div class="row d-flex justify-content-center">
-    <div class="col-10 mt-5">
-      <h1>フォロワー一覧</h1>
-      <table class="table text-center">
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td>
-                <div class="profile_image" id="image-name">
-                <%= attachment_image_tag user, :profile_image, :fill, 80, 80 %>
-                </div>
-              </td>
-              <td>
-                <%= link_to user_path(user) do %>
-                  <%= user.username %>
-                <% end %>
-              </td>
-              <td id="relationship_<%= user.id %>">
-                <% if user != current_user %>
-                  <% if user.is_followed_by?(current_user) %>
-                    <%= link_to "フォロー解除", user_relationships_path(user), method: :delete, remote: true, class: "button is-danger" %>
-                  <% else %>
-                    <%= link_to "フォロー", user_relationships_path(user), method: :post, remote: true, class: "button is-info" %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+<section class="hero has-background-grey">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        フォロワー一覧
+      </h1>
     </div>
   </div>
-</div>
+</section>
 
+<%= render "follow" %>

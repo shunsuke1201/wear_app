@@ -94,35 +94,25 @@ RSpec.describe "Users", type: :system do
   end
   
   describe "edit" do
-  let(:user) { create(:user) }
-  before do
-    sign_in user
-    # ユーザー編集ページにアクセス
-    visit edit_user_path(user)
-  end
-
-  it "編集ページが表示されていること" do
-    expect(page).to have_content("ユーザー編集")
-  end
-
-  it "ユーザー情報を編集できること" do
-  fill_in "名前", with: "Update"
-  fill_in "メールアドレス", with: "updated@example.com"
-  fill_in "身長", with: 170
-  fill_in "体重", with: 60
-
-  # 画像のアップロードは、ローカル環境で実行する場合のみ有効です。
-  # 以下のコメントアウトを解除して、実行してください。
-  # attach_file "プロフィール画像", Rails.root.join("spec/fixtures/images/example.jpg")
-
-  click_on "更新"
-
-  expect(page).to have_content("Update") # 修正: "Update" の表示を確認する
-  expect(page).to have_content("170cm")
-  expect(page).to have_content("60kg")
-  # 以下のコメントアウトを解除して、画像のアップロードのテストを実行してください。
-  # expect(page).to have_selector("img[src$='example.jpg']")
-end
-
+    let(:user) { create(:user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+  
+    it "編集ページが表示されていること" do
+      expect(page).to have_content("ユーザー編集")
+    end
+  
+    it "ユーザー情報を編集できること" do
+      fill_in "名前", with: "Update"
+      fill_in "メールアドレス", with: "updated@example.com"
+      fill_in "身長", with: 170
+      fill_in "体重", with: 60
+      click_on "更新"
+      expect(page).to have_content("Update")
+      expect(page).to have_content("170cm")
+      expect(page).to have_content("60kg")
+    end
   end
 end

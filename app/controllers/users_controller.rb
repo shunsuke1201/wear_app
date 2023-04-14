@@ -7,6 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @following_posts = Post.joins(:user).where(user_id: @user.followings.ids).order('created_at DESC')
+    @favorite_posts = Post.joins(:favorites).where(favorites: { user_id: @user.id })
   end
 
   def edit
@@ -38,11 +40,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
-
-
-  
   def destroy
   end
   

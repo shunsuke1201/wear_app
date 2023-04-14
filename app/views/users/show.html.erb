@@ -2,11 +2,7 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        <% if @user.id == current_user.id %>
-          マイページ
-        <% else %>
-          ユーザーページ
-        <% end %>
+        <%= @user.username %>のページ
       </h1>
     </div>
   </div>
@@ -14,69 +10,143 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-10">
-        <div class="columns is-centered">
-          <div class="column is-4" id="image-name">
-            <figure class="image">
-              <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000, fallback: "no-image.png" %>
-            </figure>
-            <p class="name">
-              <strong>
-                <%= @user.username %>
-              </strong>
-            </p>
-          </div>
-          <div class="column is-8">
-            <table class="table is-fullwidth">
-              <tr>
-                <td class="is-size-4">
-                  <strong>
-                    <data>
-                      <%= @user.height %>cm
-                    </data>
-                    <data>
-                      <%= @user.weight %>kg
-                    </data>
-                    <data id="relationship_count">
-                      <%= render partial: "relationships/relationship_count", locals: { user: @user } %>
-                    </data>
-                  </strong>
-                </td>
-                <% if @user.id == current_user.id %>
-                <td class="is-size-4">
-                  <%= @user.email %>
-                </td>
-                <td>
-                  <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
-                </td>
-                <% else %>
-                <td id="relationship_<%= @user.id %>">
-                  <%= render partial: "relationships/relationship", locals: { user: @user } %>
-                </td>
-                <% end %>
-              </tr>
-            </table>
-            <table class="table is-fullwidth">
-              <tr>
-                <td>
-                  <%= @user.profile %>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
+    <div class="columns">
+      <div id="image-name">
+        <figure class="image">
+          <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000, fallback: "no-image.png" %>
+        </figure>
+        <p class="name">
+          <strong>
+            <%= @user.username %>
+          </strong>
+        </p>
       </div>
+    </div>
+    <div>
+      <table class="table is-fullwidth">
+        <tr>
+          <td class="is-size-4">
+            <strong>
+              <span>
+                身長:<%= @user.height %>cm
+              </span>
+              <span>
+                体重:<%= @user.weight %>kg
+              </span>
+              <span id="relationship_count">
+                <%= render partial: "relationships/relationship_count", locals: { user: @user } %>
+              </span>
+            </strong>
+          </td>
+          <% if @user.id == current_user.id %>
+          <td class="is-size-4">
+            <%= @user.email %>
+          </td>
+          <td>
+            <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
+          </td>
+          <% else %>
+          <td id="relationship_<%= @user.id %>">
+            <%= render partial: "relationships/relationship", locals: { user: @user } %>
+          </td>
+          <% end %>
+        </tr>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <% @user.posts.each do |post| %>
-        <%= render partial: 'posts/post', locals: { post: post } %>
-      <% end %>
+<div class="container">
+  <div class="tabs is-toggle">
+    <ul>
+      <li class="is-active" id="user-posts-tab">
+        <a>
+          <span><%= @user.username %>の投稿</span>
+        </a>
+      </li>
+      <li id="following-posts-tab">
+        <a>
+          <span>フォローしているユーザーの投稿</span>
+        </a>
+      </li>
+      <li id="favorite-posts-tab">
+        <a>
+          <span>いいねした投稿</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div class="tab-content" id="userPosts">
+      <section class="section">
+        <div class="container">
+          <div class="columns is-multiline">
+            <% @user.posts.each do |post| %>
+              <%= render partial: 'posts/post', locals: { post: post } %>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="tab-content" id="followingPosts" style="display:none;">
+      <section class="section">
+        <div class="container">
+          <div class="columns is-multiline">
+            <% @following_posts.each do |post| %>
+              <%= render partial: 'posts/post', locals: { post: post } %>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="tab-content" id="favoritePosts" style="display:none;">
+      <section class="section">
+        <div class="container">
+          <div class="columns is-multiline">
+            <% @favorite_posts.each do |post| %>
+              <%= render partial: 'posts/post', locals: { post: post } %>
+            <% end %>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-</section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userPostsTab = document.getElementById('user-posts-tab');
+    const followingPostsTab = document.getElementById('following-posts-tab');
+    const favoritePostsTab = document.getElementById('favorite-posts-tab');
+    const userPostsContent = document.getElementById('userPosts');
+    const followingPostsContent = document.getElementById('followingPosts');
+    const favoritePostsContent = document.getElementById('favoritePosts');
+
+    userPostsTab.addEventListener('click', () => {
+      userPostsTab.classList.add('is-active');
+      followingPostsTab.classList.remove('is-active');
+      favoritePostsTab.classList.remove('is-active');
+      userPostsContent.style.display = 'block';
+      followingPostsContent.style.display = 'none';
+      favoritePostsContent.style.display = 'none';
+    });
+
+    followingPostsTab.addEventListener('click', () => {
+      userPostsTab.classList.remove('is-active');
+      followingPostsTab.classList.add('is-active');
+      favoritePostsTab.classList.remove('is-active');
+      userPostsContent.style.display = 'none';
+      followingPostsContent.style.display = 'block';
+      favoritePostsContent.style.display = 'none';
+    });
+
+    favoritePostsTab.addEventListener('click', () => {
+      userPostsTab.classList.remove('is-active');
+      followingPostsTab.classList.remove('is-active');
+      favoritePostsTab.classList.add('is-active');
+      userPostsContent.style.display = 'none';
+      followingPostsContent.style.display = 'none';
+      favoritePostsContent.style.display = 'block';
+    });
+  });
+</script>
