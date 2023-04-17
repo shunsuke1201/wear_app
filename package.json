@@ -15,11 +15,11 @@
     "scss-tokenizer": "^0.4.3",
     "trim-newlines": "^5.0.0",
     "turbolinks": "^5.2.0",
+    "webpack-cli": "^5.0.1",
     "webpack": "^5.0.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   }
 }
