@@ -28,8 +28,17 @@
                 <div class="media-content">
                   <div class="title"><%=link_to user.username, user_path(user) %></div>
                 </div>
-                <div class="content">投稿数：<%= user.posts.count %></div>
+                <div class="count">投稿数：<%= user.posts.count %></div>
               </div>
+              <% if user_signed_in? %>
+              <div class="content">
+                <% if current_user && current_user != user %>
+                  <strong>好みのマッチ度: <%= current_user.genre_match_percentage(user) %>%</strong>
+                <% else %>
+                  <strong>マイアカウント</strong>
+                <% end %>
+              </div>
+              <% end %>
             </div>
           </div>
         </div>

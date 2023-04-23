@@ -10,7 +10,7 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns">
+    <div class="columns is-vcentered">
       <div id="image-name">
         <figure class="image">
           <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000, fallback: "no-image.png" %>
@@ -20,6 +20,23 @@
             <%= @user.username %>
           </strong>
         </p>
+      </div>
+      <div class="column is-6 is-size-4">
+        <% if @genres.present? %>
+          <strong class="tags">好きなジャンル</strong>
+            <% @genres.each do |genre| %>
+              <span class="tag"><%= genre.name %></span>
+            <% end %>
+        <% else %>
+          <strong>好きなジャンルは登録されていません。</strong>
+        <% end %>
+      </div>
+      <div class="is-size-4">
+        <strong>
+          <% if current_user && current_user != @user %>
+            <p>好みのマッチ度: <%= current_user.genre_match_percentage(@user) %>%</p>
+          <% end %>
+         </strong>
       </div>
     </div>
     <div>

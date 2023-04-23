@@ -36,7 +36,7 @@
         </div>
         
         <div class="field">
-          <%= f.label :height, "身長", class: "label" %>
+          <%= f.label :height, "身長(cm)", class: "label" %>
           <p class="control has-icons-left">
             <%= f.text_field :height, autofocus: true, autocomplete: "height", :placeholder => "height", class: "input" %>
             <span class="icon is-small is-left">
@@ -46,7 +46,7 @@
         </div>
         
         <div class="field">
-          <%= f.label :weight, "体重", class: "label" %>
+          <%= f.label :weight, "体重(kg)", class: "label" %>
           <p class="control has-icons-left">
             <%= f.text_field :weight, autofocus: true, autocomplete: "weight", :placeholder => "weight", class: "input" %>
             <span class="icon is-small is-left">
@@ -54,6 +54,19 @@
             </span>
           </p>
         </div>
+        
+        <div class="field">
+          <%= f.label :genres, "好きなジャンル（３つまで）", class: "label" %>
+          <div class="control has-icons-left">
+            <div class="select is-multiple">
+              <%= f.collection_select :genre_ids, Genre.all, :id, :name, { prompt: false }, { multiple: true, size: 3, name: "user[genre_ids][]" } %>
+            </div>
+            <span class="icon is-left">
+              <i class="fas fa-tshirt"></i>
+            </span>
+          </div>
+        </div>
+
 
         <div class="field">
           <%= f.label :password, "パスワード", class: "label" %>
