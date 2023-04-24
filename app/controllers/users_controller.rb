@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_find, { only:[:show, :edit, :update, :followings, :followers]}
+  before_action :user_find, { only:[:show, :edit, :update, :destroy, :followings, :followers]}
   before_action :authenticate_user!, except: [:index]
   
   def index
@@ -47,6 +47,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    if @user == current_user
+      @user.destroy
+      redirect_to root_path, notice: "アカウントを削除しました"
+    else
+      redirect_to users_path, alert: "不正なアクセスです"
+    end
   end
   
   def followings

@@ -74,3 +74,5 @@ gem 'ransack'
 gem 'kaminari'
 
 gem "refile-s3"
+
+gem 'dotenv-rails'
