@@ -72,3 +72,5 @@ gem 'font-awesome-sass'
 gem 'ransack'
 
 gem 'kaminari'
+
+gem "refile-s3"
