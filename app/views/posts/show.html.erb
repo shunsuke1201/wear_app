@@ -16,7 +16,7 @@
           <div class="card-image">
             <figure class="image" id="slider">
               <% @post.post_images.each do |image| %>
-                <%= attachment_image_tag image, :image, :fill, 800, 800 %>
+                <%= attachment_image_tag image, :image %>
               <% end %>
             </figure>
           </div>
