@@ -28,64 +28,53 @@
       </div>
     <% end %>
       
-    <nav class="navbar has-background-grey-dark">
-      <% if user_signed_in? %>
-        <%= link_to user_path(current_user.id), class: "navbar-item" do %>
-          <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+    <nav class="navbar has-background-grey-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <% if user_signed_in? %>
+          <%= link_to user_path(current_user.id), class: "navbar-item" do %>
+            <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+          <% end %>
+        <% else %>
+          <%= link_to root_path, class: "navbar-item" do %>
+            <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= link_to root_path, class: "navbar-item" do %>
-          <h1 class="title is-4" style="font-family: fantasy;">VINTAGE HOLIC</h1>
-        <% end %>
-      <% end %>
-      
-      <% if user_signed_in? %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+    
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu has-background-grey-dark">
+        <div class="navbar has-background-grey-dark">
           <div class="navbar-item">
             <%= link_to "投稿一覧", posts_path, class: "navbar-item button is-warning is-light" %>
           </div>
           <div class="navbar-item">
             <%= link_to "ユーザー一覧", users_path, class: "button is-warning is-light" %>
           </div>
-
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "新規投稿", new_post_path, class: "navbar-item button is-warning is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <% if user_signed_in? %>
           <div class="navbar-item">
-            <%= link_to "投稿一覧", posts_path, class: "navbar-item button is-warning is-light" %>
+            <%= link_to "新規投稿", new_post_path, class: "navbar-item button is-warning is-light" %>
           </div>
           <div class="navbar-item">
-            <%= link_to "ユーザー一覧", users_path, class: " button is-warning is-light" %>
+            <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
           </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
-                </p>
-              </div>
-            </div>
+          <div class="navbar-item">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
           </div>
+        <% else %>
+          <div class="navbar-item">
+            <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+           </div>
+        <% end %>
         </div>
-      <% end %>
+      </div>
     </nav>
     <%= yield %>
   </body>
