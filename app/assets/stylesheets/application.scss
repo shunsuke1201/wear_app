@@ -64,3 +64,10 @@
 .navbar-burger {
  color: white;
 }
+
+.current-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 5px;
+}

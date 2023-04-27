@@ -1,22 +1,32 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
+      <div class="column is-10">
         <%= form_for @post do |f| %>
           <div class="field">
             <%= f.label :item, "アイテム", class: "label" %>
             <%= f.text_field :item, class: "input" %>
           </div>
-
           <div class="field">
             <%= f.label :body, "アイテム詳細", class: "label" %>
-            <%= f.text_area :body, class: "textarea", value: "サイズ: \n着丈: \n袖丈: \n身幅: \n総丈: \nその他詳細: " %>
+            <%= f.text_area :body, class: "textarea", value: @post.persisted? ? @post.body : "サイズ: \n着丈: \n袖丈: \n身幅: \n総丈: \nその他詳細: " %>
           </div>
-          
-          <div class="field">  
-            <%= f.label :image, "画像", class: "label" %>
-            <%= f.attachment_field :post_images_images, multiple: true, class: "input" %>
-          </div>
+          <% if @post.post_images.any? %>
+            <div class="field">
+              <%= f.label :item_images, "アイテム画像", class: "label" %>
+              <div class="current-images">
+                <% @post.post_images.each do |image| %>
+                  <%= attachment_image_tag(image, :image, :fill, 50, 50) %>
+                <% end %>
+              </div>
+                <%= f.attachment_field :post_images_images, multiple: true, class: "input" %>
+            </div>
+          <% else %>
+            <div class="field">
+              <%= f.label :item_images, "アイテム画像", class: "label" %>
+              <%= f.attachment_field :post_images_images, multiple: true, class: "input" %>
+            </div>
+          <% end %>
           <%= f.submit "投稿", class: "button is-success" %>
         <% end %>
       </div>
