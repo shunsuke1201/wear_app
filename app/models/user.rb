@@ -37,4 +37,13 @@ class User < ApplicationRecord
     total_genres = self.genres | user.genres
     (common_genres.count.to_f / total_genres.count.to_f * 100).round
   end
+  
+  def self.guest
+    find_or_create_by!(username: 'ゲストユーザー', email: 'guest@example.com', height: '180', weight: '70') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = 'ゲストユーザー'
+      user.height = '180'
+      user.weight = '70'
+    end
+  end
 end

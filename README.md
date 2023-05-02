@@ -15,3 +15,5 @@
 ・Git(GitHub)
 ・Jquery
 ・RSpec
+・HEROKU
+・AWS S3

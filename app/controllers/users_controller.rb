@@ -63,6 +63,12 @@ class UsersController < ApplicationController
     @users = @user.followers
   end
   
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to user_path(user), notice: "ゲストユーザーとしてログインしました。"
+  end
+  
   private
   
   def user_find
