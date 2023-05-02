@@ -4,8 +4,9 @@ class PostsController < ApplicationController
   
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(8)
+    @posts = @q.result(distinct: true).includes(:user, :post_images).order(created_at: :desc).page(params[:page]).per(8)
   end
+
 
   def show
   end
