@@ -8,6 +8,10 @@
             <%= f.text_field :item, class: "input" %>
           </div>
           <div class="field">
+            <%= f.label :category, "カテゴリー", class: "label" %>
+            <%= f.select :category, Post::CATEGORIES, { prompt: "カテゴリーを選択してください" }, { class: 'form-control' } %>
+          </div>
+          <div class="field">
             <%= f.label :body, "アイテム詳細", class: "label" %>
             <%= f.text_area :body, class: "textarea", value: @post.persisted? ? @post.body : "サイズ: \n着丈: \n袖丈: \n身幅: \n総丈: \nその他詳細: " %>
           </div>

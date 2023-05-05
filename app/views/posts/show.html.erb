@@ -29,7 +29,13 @@
             <div class="content">
               <table class="table is-narrow">
                 <tr>
-                  <th>投稿</th>
+                  <td>カテゴリー:
+                    <% if @post.category.present? %>
+                      <%= @post.category %>
+                    <% else %>
+                      選択されていません
+                    <% end %>
+                  </td>
                 </tr>
                 <tr>
                   <td><%= simple_format @post.body %></td>
